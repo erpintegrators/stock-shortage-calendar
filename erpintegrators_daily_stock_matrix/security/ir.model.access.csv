@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_watchlist_user,Personal stock watchlist,model_erpintegrators_stock_watchlist,stock.group_stock_user,1,1,1,1
+access_shortage_snapshot,Private review baseline,model_erpintegrators_shortage_snapshot,stock.group_stock_user,1,1,1,1
+access_shortage_source,Baseline movement,model_erpintegrators_shortage_source,stock.group_stock_user,1,1,1,1
+access_shortage_action,Shortage follow-up,model_erpintegrators_shortage_action,stock.group_stock_user,1,1,1,1
+access_shortage_history,Follow-up history,model_erpintegrators_shortage_history,stock.group_stock_user,1,1,1,1
+access_shortage_scan,Private warehouse scan,model_erpintegrators_shortage_scan,stock.group_stock_user,1,1,1,1
+access_shortage_scan_line,Observed warehouse shortage,model_erpintegrators_shortage_scan_line,stock.group_stock_user,1,1,1,1

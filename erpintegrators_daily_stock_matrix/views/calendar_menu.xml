@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_stock_shortage_calendar" model="ir.actions.client">
+        <field name="name">Stock Shortage Calendar</field>
+        <field name="tag">erpintegrators_stock_shortage_calendar</field>
+    </record>
+    <menuitem id="menu_stock_shortage_calendar" name="Stock Shortage Calendar"
+              parent="stock.menu_stock_root" action="action_stock_shortage_calendar"
+              groups="stock.group_stock_user" sequence="45"/>
+</odoo>
