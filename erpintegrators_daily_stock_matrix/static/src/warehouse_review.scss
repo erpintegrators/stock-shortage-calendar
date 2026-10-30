@@ -1,0 +1,13 @@
+.o_warehouse_review {
+    min-width: 0;
+    .o_scan_table_wrap { overflow-x: auto; max-width: 100%; }
+    .o_scan_table { min-width: 620px; }
+    .o_scan_queue { max-width: 340px; }
+    p, th, td { overflow-wrap: anywhere; }
+    h2 { font-size: 1.35rem; }
+}
+
+.o_web_client .o_action_manager .o_stock_shortage_calendar.o_action {
+    display: block;
+    .o_scan_table_wrap { max-height: 400px; }
+}

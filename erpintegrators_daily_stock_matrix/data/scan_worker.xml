@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="shortage_scan_worker" model="ir.cron">
+        <field name="name">Continue warehouse shortage scans</field><field name="model_id" ref="model_erpintegrators_shortage_scan"/>
+        <field name="state">code</field><field name="code">model._cron_advance()</field><field name="user_id" ref="base.user_root"/>
+        <field name="numbercall">-1</field>
+        <field name="interval_number">1</field><field name="interval_type">minutes</field>
+    </record>
+    <record id="shortage_scan_cleanup" model="ir.cron">
+        <field name="name">Expire warehouse shortage scans</field><field name="model_id" ref="model_erpintegrators_shortage_scan"/>
+        <field name="state">code</field><field name="code">model._cron_prune()</field><field name="user_id" ref="base.user_root"/>
+        <field name="numbercall">-1</field>
+        <field name="interval_number">1</field><field name="interval_type">hours</field>
+    </record>
+</odoo>
