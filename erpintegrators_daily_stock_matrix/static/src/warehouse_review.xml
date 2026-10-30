@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="erpintegrators_daily_stock_matrix.WarehouseReview">
+    <section class="o_warehouse_review border rounded p-3 my-3" aria-label="Warehouse review" t-att-data-horizon="this.props.days">
+      <h2>Warehouse review</h2>
+      <p>Scan the readable stock catalogue for this warehouse. Each batch records its own observation time. Open a product to review its current forecast.</p>
+      <div class="o_scan_controls d-flex flex-wrap gap-2 align-items-center">
+        <button class="btn btn-primary" t-on-click="this.start" t-att-disabled="this.state.busy || this.state.run?.state === 'running'">Start warehouse scan</button>
+        <button class="btn btn-secondary" t-on-click="this.load" t-att-disabled="this.state.busy">Reload review</button>
+        <button t-if="this.state.run?.state === 'running'" class="btn btn-secondary" t-on-click="() => this.control('cancel')" t-att-disabled="this.state.busy">Cancel scan</button>
+        <button t-if="this.state.run?.state === 'failed' &amp;&amp; !this.state.run.date_changed" class="btn btn-secondary" t-on-click="() => this.control('retry')" t-att-disabled="this.state.busy">Retry failed batch</button>
+      </div>
+      <div t-if="this.state.run" class="o_scan_status my-2" role="status">
+        <span>Scan state: </span><span class="o_scan_state" t-esc="this.state.run.state"/>.
+        <span> Products processed: </span><span class="o_scan_processed" t-esc="this.state.run.processed"/> / <span class="o_scan_total" t-esc="this.state.run.total"/>.
+        <span> Unavailable since start: </span><t t-esc="this.state.run.unavailable"/>.
+        <p>Started (UTC): <t t-esc="this.state.run.started_at"/>. Last batch (UTC): <t t-esc="this.state.run.updated_at"/>.</p>
+        <p t-if="this.state.run.state !== 'complete'">Coverage is partial. Results include processed products only.</p>
+        <p t-if="this.state.run.failure">The scan stopped at its last committed batch. Retry the failed batch or start a new scan after a date change.</p>
+        <p t-if="this.state.run.date_changed">The UTC date changed. Start a new scan for today's horizon.</p>
+      </div>
+      <p t-else="">No saved scan for this horizon. My actions and Overdue work without a scan.</p>
+      <div t-if="this.state.error" class="alert alert-danger mt-2" role="alert"><t t-esc="this.state.error"/></div>
+      <label class="d-block mt-2">Review queue
+        <select class="form-select o_scan_queue" t-on-change="this.changeQueue" t-att-value="this.state.queue">
+          <option value="scan">Scanned shortages</option><option value="my">My actions</option><option value="overdue">Overdue</option><option value="unassigned">Unassigned</option>
+        </select>
+      </label>
+      <p t-if="this.state.loading" role="status">Loading queue...</p>
+      <t t-if="this.state.data">
+        <p class="o_queue_count" role="status"><t t-esc="this.state.data.total"/> matching items.</p>
+        <p t-if="this.state.queue === 'scan' || this.state.queue === 'unassigned'">These items describe the selected scan observations. Completed follow-ups and unavailable owners count as unassigned. Refresh the scan to observe later stock changes.</p>
+        <p t-else="">Active follow-ups use the current forecast. Stock recovery keeps the follow-up open until it is completed.</p>
+        <p t-if="!this.state.data.rows.length" class="o_queue_empty">No items in this queue.</p>
+        <div t-else="" class="o_scan_table_wrap" tabindex="0" role="region" aria-label="Warehouse shortage items">
+          <table class="table o_scan_table">
+            <thead><tr><th scope="col">Product</th><th scope="col">First shortage (UTC)</th><th scope="col">Unit</th><th scope="col">Observed (UTC)</th><th scope="col">Review</th></tr></thead>
+            <tbody><tr t-foreach="this.state.data.rows" t-as="row" t-key="row.id">
+              <th scope="row" t-esc="row.name"/>
+              <td><t t-if="row.first_shortage" t-esc="row.first_shortage"/><t t-else="">Forecast recovered</t></td>
+              <td><t t-esc="row.uom"/><span t-if="row.unit_changed"> Unit changed. Start a new scan.</span></td>
+              <td><t t-if="row.observed_at" t-esc="row.observed_at"/><t t-else="">Current forecast</t></td>
+              <td><button class="btn btn-link" t-on-click="() => this.open(row.id)">Open product review</button></td>
+            </tr></tbody>
+          </table>
+        </div>
+        <div class="d-flex gap-2 align-items-center o_queue_pager">
+          <button class="btn btn-secondary o_queue_previous" t-att-disabled="this.state.loading || !this.state.data.offset" t-on-click="(event) => this.page(event, -25)">Previous items</button>
+          <span>Page <t t-esc="Math.floor(this.state.data.offset / 25) + 1"/></span>
+          <button class="btn btn-secondary o_queue_next" t-att-disabled="this.state.loading || this.state.data.offset + 25 >= this.state.data.total" t-on-click="(event) => this.page(event, 25)">Next items</button>
+        </div>
+      </t>
+    </section>
+  </t>
+  <t t-name="erpintegrators_daily_stock_matrix.WarehouseReviewExtension" t-inherit="erpintegrators_daily_stock_matrix.Calendar" t-inherit-mode="extension">
+    <xpath expr="//details[div[contains(@class, 'o_calendar_products')]]" position="before">
+      <WarehouseReview t-if="this.state.warehouse" t-key="this.state.warehouse + ':' + this.state.days" warehouseId="this.state.warehouse" days="this.state.days" onOpen="(id) => this.openQueueProduct(id)"/>
+    </xpath>
+  </t>
+</templates>

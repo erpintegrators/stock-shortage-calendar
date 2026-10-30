@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="erpintegrators_daily_stock_matrix.Calendar" t-inherit-mode="extension">
+        <xpath expr="//section[contains(@class, 'o_shortage_worklist')]" position="before">
+            <section class="o_shortage_workflow mb-3" aria-label="Shortage review workflow">
+                <h2 class="h4">Changes and follow-up</h2>
+                <div t-if="this.state.workflowError" class="alert alert-danger" role="alert" t-esc="this.state.workflowError"/>
+                <p t-if="this.state.workflowMessage" role="status" t-esc="this.state.workflowMessage"/>
+                <button class="btn btn-outline-secondary mb-2" t-on-click="this.captureBaseline" t-att-disabled="this.state.workflowBusy || this.state.loading">Save review baseline</button>
+                <span t-if="this.state.workflowBusy" role="status">Saving or loading workflow...</span>
+                <p>Baselines are private and expire after 90 days. Changes compare matching UTC dates. Source details follow current permissions.</p>
+                <details class="o_workflow_reviews"><summary>Review selected products</summary>
+                    <ul class="list-unstyled">
+                        <li t-foreach="this.state.data.rows" t-as="row" t-key="row.id" class="o_workflow_row border rounded p-2 mb-2">
+                            <div class="fw-bold" t-esc="row.name"/>
+                            <p class="mb-1 o_workflow_change"><t t-esc="this.workflowLabel(row.workflow.comparison.status)"/>
+                                <t t-if="row.workflow.comparison.dates"> / <t t-esc="row.workflow.comparison.dates"/> comparable dates: <t t-esc="row.workflow.comparison.from"/> to <t t-esc="row.workflow.comparison.through"/></t>
+                            </p>
+                            <p t-if="row.workflow.comparison.captured_at" class="mb-1">Baseline saved: <t t-esc="row.workflow.comparison.captured_at"/> UTC</p>
+                            <p t-if="!row.workflow.comparison.sources_complete">Source detail is limited by access or row limits.</p>
+                            <ul class="o_workflow_source_changes">
+                                <li t-foreach="row.workflow.comparison.source_changes" t-as="change" t-key="change.move_id">
+                                    <span>Movement</span> <t t-esc="change.move_id"/>:
+                                    <span t-if="change.kind === 'changed'">changed</span><span t-if="change.kind === 'added'">added</span><span t-if="change.kind === 'no_longer_open'">no longer in the open source list</span>
+                                    <t t-if="change.date"> / <t t-esc="change.old_date || ''"/> to <t t-esc="change.date"/> UTC / <t t-esc="change.old_quantity === undefined ? '' : change.old_quantity"/> to <t t-esc="change.quantity"/> <t t-esc="row.uom"/></t>
+                                </li>
+                            </ul>
+                            <p class="o_workflow_forecast mb-1"><span t-if="row.workflow.forecast_short">Forecast shortage remains.</span><span t-else="">Forecast is clear in the visible horizon.</span></p>
+                            <t t-if="row.workflow.action">
+                                <p class="mb-1">Owner: <t t-esc="row.workflow.action.owner"/> / Due: <t t-esc="row.workflow.action.due_date"/> / Follow-up: <t t-esc="row.workflow.action.state"/> / Revision: <t t-esc="row.workflow.action.revision"/></p>
+                                <p t-if="row.workflow.action.needs_review" class="o_action_needs_review alert alert-warning">Forecast changed. Review the action.</p>
+                                <p class="o_workflow_note" t-esc="row.workflow.action.note"/>
+                                <details class="o_action_history"><summary>Action history</summary>
+                                    <ul><li t-foreach="row.workflow.action.history" t-as="entry" t-key="entry.revision">Revision <t t-esc="entry.revision"/> / <t t-esc="entry.at"/> UTC / <t t-esc="entry.actor"/> / <t t-esc="entry.owner"/> / <t t-esc="entry.due_date"/> / <t t-esc="entry.state"/>: <t t-esc="entry.note"/></li></ul>
+                                </details>
+                            </t>
+                            <div class="d-flex flex-wrap gap-2 mt-2">
+                                <button t-if="row.first_shortage || row.workflow.action" class="btn btn-outline-primary btn-sm" t-on-click="() => this.editAction(row.id)" t-att-disabled="this.state.workflowBusy">Manage action</button>
+                                <button class="btn btn-outline-secondary btn-sm" t-on-click="() => this.openSimulation(row.id)" t-att-disabled="this.state.simulationBusy">Simulate receipt timing</button>
+                            </div>
+                        </li>
+                    </ul>
+                </details>
+                <section t-if="this.state.actionForm" class="o_shortage_action_form border p-3 mt-3" aria-label="Shortage action">
+                    <h3 class="h5">Manage shortage action</h3><p t-esc="this.state.actionForm.product"/>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div><label for="ssc_action_owner">Action owner</label><select id="ssc_action_owner" t-att-disabled="this.state.workflowBusy" class="form-select" t-on-change="this.changeActionOwner"><option t-foreach="this.state.owners" t-as="owner" t-key="owner.id" t-att-value="owner.id" t-att-selected="owner.id === this.state.actionForm.owner" t-esc="owner.name"/></select></div>
+                        <div><label for="ssc_action_due">Action due date</label><input id="ssc_action_due" t-att-disabled="this.state.workflowBusy" type="date" class="form-control" t-att-value="this.state.actionForm.due" t-on-input="this.changeActionDue"/></div>
+                        <div><label for="ssc_action_state">Action state</label><select id="ssc_action_state" t-att-disabled="this.state.workflowBusy" class="form-select" t-on-change="this.changeActionState"><option value="open" t-att-selected="this.state.actionForm.state === 'open'">Open</option><option value="progress" t-att-selected="this.state.actionForm.state === 'progress'">In progress</option><option value="done" t-att-selected="this.state.actionForm.state === 'done'">Done</option></select></div>
+                    </div>
+                    <label for="ssc_action_note">Internal action note</label><textarea id="ssc_action_note" t-att-disabled="this.state.workflowBusy" class="form-control mb-2" maxlength="2000" t-att-value="this.state.actionForm.note" t-on-input="this.changeActionNote"/>
+                    <p>Saving follow-up does not send a message or change stock. Done describes the action. Forecast recovery is shown separately.</p>
+                    <button class="btn btn-primary" t-on-click="this.saveAction" t-att-disabled="this.state.workflowBusy || !this.state.actionForm.owner">Save action</button>
+                </section>
+                <section t-if="this.state.simulationProduct" class="o_receipt_simulation border p-3 mt-3" aria-label="Receipt simulation">
+                    <h3 class="h5">Receipt timing simulation</h3>
+                    <p>Simulation only. One incoming contribution moves between UTC dates. Operational records and dependent move dates remain unchanged.</p>
+                    <p t-if="this.state.simulationBusy" role="status">Loading simulation...</p>
+                    <div t-if="this.state.simulationError" class="alert alert-danger" role="alert" t-esc="this.state.simulationError"/>
+                    <button t-if="this.state.simulationError" class="btn btn-secondary" t-on-click="() => this.openSimulation(this.state.simulationProduct)">Reload receipt choices</button>
+                    <t t-if="this.state.simulationChoices">
+                        <p t-esc="this.state.simulationChoices.product"/>
+                        <p t-if="this.state.simulationChoices.truncated">Showing the first 100 eligible receipts.</p>
+                        <p t-if="!this.state.simulationChoices.receipts.length">No eligible supplier receipts.</p>
+                        <div t-if="this.state.simulationChoices.receipts.length" class="d-flex flex-wrap gap-3 align-items-end">
+                            <div><label for="ssc_sim_receipt">Receipt to simulate</label><select id="ssc_sim_receipt" class="form-select" t-on-change="this.changeSimulationReceipt"><option t-foreach="this.state.simulationChoices.receipts" t-as="receipt" t-key="receipt.id" t-att-value="receipt.id" t-att-selected="receipt.id === this.state.simulationReceipt"><t t-esc="receipt.name"/> / <t t-esc="receipt.date"/> UTC / <t t-esc="receipt.quantity"/> <t t-esc="this.state.simulationChoices.uom"/></option></select></div>
+                            <div><label for="ssc_sim_date">Simulated arrival date (UTC)</label><select id="ssc_sim_date" class="form-select" t-on-change="this.changeSimulationDate"><option t-foreach="this.state.simulationChoices.dates" t-as="date" t-key="date" t-att-value="date" t-att-selected="date === this.state.simulationDate" t-esc="date"/></select></div>
+                            <button class="btn btn-primary" t-on-click="this.previewReceipt" t-att-disabled="this.state.simulationBusy">Preview receipt timing</button>
+                        </div>
+                    </t>
+                    <t t-if="this.state.preview">
+                        <p class="mt-2">Preview as of <t t-esc="this.state.preview.observed_at"/> UTC. Refresh choices after operational changes.</p>
+                        <p>Days below zero: baseline <t t-esc="this.state.preview.before.shortage_days"/>, simulated <t t-esc="this.state.preview.after.shortage_days"/>. Worst deficit: baseline <t t-esc="this.state.preview.before.worst_deficit"/>, simulated <t t-esc="this.state.preview.after.worst_deficit"/> <t t-esc="this.state.preview.uom"/>.</p>
+                        <div class="o_simulation_table overflow-auto" tabindex="0"><table class="table table-sm"><caption>Baseline and simulated daily quantities</caption><thead><tr><th>Date (UTC)</th><th>Baseline</th><th>Simulated</th><th>Difference</th></tr></thead><tbody><tr t-foreach="this.state.preview.cells" t-as="cell" t-key="cell.date"><th scope="row" t-esc="cell.date"/><td t-esc="cell.baseline"/><td t-esc="cell.quantity"/><td t-esc="cell.delta"/></tr></tbody></table></div>
+                    </t>
+                </section>
+            </section>
+        </xpath>
+    </t>
+</templates>

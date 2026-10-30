@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="erpintegrators_daily_stock_matrix.Calendar">
+        <div class="o_action o_stock_shortage_calendar p-3 h-100 overflow-auto">
+            <h1 class="h3">Stock Shortage Calendar</h1>
+            <p>Daily native stock forecasts by UTC date. Negative quantities mark a shortage.</p>
+            <div t-if="this.state.error" role="alert" class="alert alert-danger" t-esc="this.state.error"/>
+            <div class="d-flex flex-wrap gap-3 align-items-end mb-3">
+                <div><label for="ssc_warehouse">Warehouse</label><select id="ssc_warehouse" class="form-select" t-on-change="this.changeWarehouse" t-att-disabled="this.state.searching">
+                    <option t-if="!this.state.warehouses.length" value="">No warehouse available</option>
+                    <option t-foreach="this.state.warehouses" t-as="warehouse" t-key="warehouse.id" t-att-value="warehouse.id" t-att-selected="warehouse.id === this.state.warehouse" t-esc="warehouse.name"/>
+                </select></div>
+                <div><label for="ssc_horizon">Horizon</label><select id="ssc_horizon" class="form-select" t-on-change="this.changeDays">
+                    <option t-foreach="[7,14,31]" t-as="days" t-key="days" t-att-value="days" t-att-selected="days === this.state.days"><t t-esc="days"/> days</option>
+                </select></div>
+                <div><label for="ssc_search">Find products</label><input id="ssc_search" class="form-control" maxlength="120" t-att-value="this.state.search" t-on-input="this.changeSearch" t-on-keydown="this.searchKey"/></div>
+                <button class="btn btn-secondary" t-on-click="() => this.loadChoices()" t-att-disabled="this.state.searching">Search</button>
+                <button class="btn btn-primary" t-on-click="this.refresh" t-att-disabled="this.state.loading || this.state.searching || !this.state.warehouse || !this.state.selected.length">Refresh calendar</button>
+            </div>
+            <details class="mb-3"><summary>Products: <t t-esc="this.state.selected.length"/> selected</summary>
+                <p t-if="this.state.more">Showing the first 100 matches. Narrow the search to find another product.</p>
+                <p t-if="!this.state.products.length">No stock-tracked products match the search.</p>
+                <div class="o_calendar_products"><label t-foreach="this.state.products" t-as="product" t-key="product.id" class="d-block">
+                    <input type="checkbox" class="me-2" t-att-value="product.id" t-att-checked="this.state.selected.includes(product.id)" t-on-change="this.toggle"/><t t-esc="product.name"/>
+                </label></div>
+            </details>
+            <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                <button class="btn btn-outline-secondary" t-on-click="this.saveWatchlist" t-att-disabled="this.state.watchBusy || this.state.searching || !this.state.warehouse || !this.state.selected.length">Save my watchlist</button>
+                <button class="btn btn-outline-secondary" t-on-click="this.restoreWatchlist" t-att-disabled="this.state.watchBusy || this.state.searching">Restore my watchlist</button>
+                <span t-if="this.state.watchMessage" role="status" t-esc="this.state.watchMessage"/>
+                <span t-if="this.state.watchBusy" role="status">Updating watchlist...</span>
+            </div>
+            <p t-if="this.state.loading || this.state.searching" role="status">Loading stock forecast...</p>
+            <p t-if="!this.state.loading &amp;&amp; !this.state.searching &amp;&amp; !this.state.data">Choose products and a warehouse, then refresh the calendar.</p>
+            <t t-if="this.state.data">
+                <p><t t-esc="this.state.data.company"/> / <t t-esc="this.state.data.warehouse"/>. Dates use UTC. Quantities use each product unit of measure.</p>
+                <section class="o_shortage_worklist mb-3" aria-label="Shortage worklist">
+                    <h2 class="h4">Shortage worklist</h2>
+                    <label for="ssc_sort">Sort shortages</label>
+                    <select id="ssc_sort" class="form-select w-auto mb-2" t-on-change="this.changeSort">
+                        <option value="date" t-att-selected="this.state.sort === 'date'">First shortage date</option><option value="duration" t-att-selected="this.state.sort === 'duration'">Days below zero</option><option value="name" t-att-selected="this.state.sort === 'name'">Product name</option>
+                    </select>
+                    <p t-if="!this.worklist.length">No shortages in the selected products and horizon.</p>
+                    <ol class="list-unstyled">
+                        <li t-foreach="this.worklist" t-as="row" t-key="row.id" class="o_shortage_item border rounded p-2 mb-2">
+                            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                                <span class="fw-bold" t-esc="row.name"/>
+                                <button class="btn btn-outline-primary btn-sm" t-on-click="() => this.explain(row.id, row.first_shortage)">Explain shortage</button>
+                            </div>
+                            <dl class="d-flex flex-wrap gap-3 mb-0 mt-2">
+                                <div><dt>First shortage</dt><dd t-esc="row.first_shortage"/></div>
+                                <div><dt>Worst deficit</dt><dd><t t-esc="row.worst_deficit"/> <t t-esc="row.uom"/></dd></div>
+                                <div><dt>Days below zero</dt><dd t-esc="row.shortage_days"/></div>
+                                <div><dt>First recovery</dt><dd t-esc="row.first_recovery || this.recoveryUnknownLabel"/></div>
+                                <div t-if="row.recurs"><dt>Later shortage</dt><dd>Shortage recurs within the horizon.</dd></div>
+                            </dl>
+                        </li>
+                    </ol>
+                </section>
+                <section t-if="this.state.explanationProduct" class="o_shortage_explanation border rounded p-3 mb-3" aria-label="Shortage explanation">
+                    <h2 class="h4">Shortage explanation</h2>
+                    <label for="ssc_explain_date">Explain date (UTC)</label>
+                    <select id="ssc_explain_date" class="form-select w-auto mb-2" t-on-change="this.changeExplanationDate">
+                        <option t-foreach="this.state.data.dates" t-as="date" t-key="date" t-att-value="date" t-att-selected="date === this.state.explanationDate" t-esc="date"/>
+                    </select>
+                    <p t-if="this.state.explanationBusy" role="status">Loading explanation...</p>
+                    <div t-if="this.state.explanationError" role="alert" class="alert alert-danger" t-esc="this.state.explanationError"/>
+                    <button t-if="this.state.explanationError" class="btn btn-secondary" t-on-click="() => this.explain(this.state.explanationProduct, this.state.explanationDate)">Retry explanation</button>
+                    <t t-if="this.state.explanation">
+                        <p><t t-esc="this.state.explanation.product"/> / <t t-esc="this.state.explanation.date"/> UTC / <t t-esc="this.state.explanation.uom"/></p>
+                        <dl class="d-flex flex-wrap gap-3 o_explanation_totals">
+                            <div><dt>Opening forecast balance</dt><dd t-esc="this.state.explanation.opening"/></div>
+                            <div><dt>Scheduled receipts</dt><dd t-esc="this.state.explanation.incoming"/></div>
+                            <div><dt>Scheduled deliveries</dt><dd t-esc="this.state.explanation.outgoing"/></div>
+                            <div><dt>Closing forecast balance</dt><dd t-esc="this.state.explanation.closing"/></div>
+                        </dl>
+                        <p>Opening plus receipts less deliveries equals closing. Daily balances do not establish customer allocation or availability within a day.</p>
+                        <p>Opening includes earlier scheduled movements. Totals follow the native forecast. Source links show movements you can access, including overdue movements and dates through <t t-esc="this.state.explanation.last_date"/> UTC.</p>
+                        <p t-if="this.state.explanation.truncated" class="alert alert-warning">Showing the first 100 accessible movements. Totals include the full native report.</p>
+                        <p t-if="!this.state.explanation.movements.length">No accessible open movements in this horizon.</p>
+                        <ul class="o_explanation_movements">
+                            <li t-foreach="this.state.explanation.movements" t-as="move" t-key="move.id">
+                                <button class="btn btn-link p-0 text-start" t-on-click="() => this.openMovement(move.id)" t-esc="move.name"/>
+                                / <t t-esc="move.date"/> UTC /
+                                <span t-if="move.direction === 'in'">Receipt</span><span t-else="">Delivery</span>:
+                                <t t-esc="move.quantity"/> <t t-esc="this.state.explanation.uom"/>
+                                <span t-if="move.overdue"> (overdue)</span>
+                            </li>
+                        </ul>
+                    </t>
+                </section>
+                <p class="d-md-none">Scroll across the table to see more dates.</p>
+                <div class="o_calendar_table" tabindex="0" role="region" aria-label="Daily stock forecast, scroll horizontally for more dates">
+                    <table class="table table-bordered table-sm"><caption>Daily forecast quantities and first shortage dates, UTC</caption>
+                        <thead><tr><th scope="col">Product</th><th scope="col">Unit</th><th scope="col">First shortage</th><th scope="col" t-foreach="this.state.data.dates" t-as="date" t-key="date" t-esc="date"/></tr></thead>
+                        <tbody><tr t-foreach="this.state.data.rows" t-as="row" t-key="row.id"><th scope="row"><button class="btn btn-link p-0 text-start" t-on-click="() => this.openForecast(row.id)" t-esc="row.name"/></th><td t-esc="row.uom"/><td><t t-esc="row.first_shortage || this.noShortageLabel"/></td>
+                            <td t-foreach="row.cells" t-as="cell" t-key="cell.date" t-att-class="cell.shortage ? 'o_calendar_shortage' : ''"><span t-esc="cell.quantity"/><span t-if="cell.shortage" class="visually-hidden"> shortage</span></td>
+                        </tr></tbody>
+                    </table>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

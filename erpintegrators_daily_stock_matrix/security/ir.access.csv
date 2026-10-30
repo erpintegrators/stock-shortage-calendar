@@ -1,0 +1,15 @@
+id,name,model_id,group_id/id,operation,domain
+access_stock_watchlist_user,Personal stock watchlist,erpintegrators.stock.watchlist,stock.group_stock_user,crud,
+watchlist_owner_rule,Personal stock watchlist access,erpintegrators.stock.watchlist,,crud,"[('user_id', '=', user.id), ('company_id', 'in', company_ids)]"
+access_workflow_snapshot_user,Stock workflow snapshot,erpintegrators.shortage.snapshot,stock.group_stock_user,crud,
+access_workflow_source_user,Stock workflow source,erpintegrators.shortage.source,stock.group_stock_user,crud,
+access_workflow_action_user,Stock workflow action,erpintegrators.shortage.action,stock.group_stock_user,crud,
+access_workflow_history_user,Stock workflow history,erpintegrators.shortage.history,stock.group_stock_user,crud,
+snapshot_scope_rule,Private baseline scope,erpintegrators.shortage.snapshot,,crud,"[('user_id', '=', user.id), ('company_id', 'in', company_ids), ('warehouse_id', 'access', 'read'), ('product_id', 'any', [('active', '=', True)]), ('product_id', 'access', 'read')]"
+snapshot_source_rule,Readable baseline source,erpintegrators.shortage.source,,crud,"[('snapshot_id', 'access', 'read'), ('move_id', 'access', 'read')]"
+shortage_action_rule,Authorized follow-up scope,erpintegrators.shortage.action,,crud,"[('company_id', 'in', company_ids), ('warehouse_id', 'access', 'read'), ('product_id', 'any', [('active', '=', True)]), ('product_id', 'access', 'read')]"
+shortage_history_rule,Authorized follow-up history,erpintegrators.shortage.history,,crud,"[('action_id', 'access', 'read')]"
+access_shortage_scan,Private warehouse scan,erpintegrators.shortage.scan,stock.group_stock_user,crud,
+access_shortage_scan_line,Observed warehouse shortage,erpintegrators.shortage.scan.line,stock.group_stock_user,crud,
+shortage_scan_rule,Private warehouse scan scope,erpintegrators.shortage.scan,,crud,"[('user_id', '=', user.id), ('company_id', 'in', company_ids), ('warehouse_id', 'access', 'read'), ('started_at', '>=', 'now -24H')]"
+shortage_scan_line_rule,Readable scan shortage,erpintegrators.shortage.scan.line,,crud,"[('run_id', 'access', 'read'), ('product_id', 'any', [('active', '=', True)]), ('product_id', 'access', 'read')]"

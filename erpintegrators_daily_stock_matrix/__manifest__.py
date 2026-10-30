@@ -1,0 +1,29 @@
+{
+    "name": "Stock Shortage Calendar",
+    "summary": "Prioritize stock shortages and inspect native forecast movements",
+    "version": "20.0.1.0",
+    "category": "Inventory/Inventory",
+    "author": "Solvync Inc.",
+    "website": "https://erpintegrators.com",
+    "license": "LGPL-3",
+    "depends": ["stock", "web"],
+    "data": [
+        "security/ir.access.csv",
+        "data/workflow_cleanup.xml",
+        "data/scan_worker.xml",
+        "views/calendar_menu.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "erpintegrators_daily_stock_matrix/static/src/calendar.js",
+            "erpintegrators_daily_stock_matrix/static/src/calendar.xml",
+            "erpintegrators_daily_stock_matrix/static/src/calendar.scss",
+            "erpintegrators_daily_stock_matrix/static/src/workflow.xml",
+            "erpintegrators_daily_stock_matrix/static/src/warehouse_review.js",
+            "erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml",
+            "erpintegrators_daily_stock_matrix/static/src/warehouse_review.scss",
+        ],
+    },
+    "installable": True,
+    "application": False,
+}

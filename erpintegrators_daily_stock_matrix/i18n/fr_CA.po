@@ -1,0 +1,480 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Stock Shortage Calendar 20.0\n"
+"Language: fr_CA\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Stock Shortage Calendar"
+msgstr "Calendrier des ruptures de stock"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Horizon"
+msgstr "Période"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Find products"
+msgstr "Rechercher des produits"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Search"
+msgstr "Rechercher"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Refresh calendar"
+msgstr "Actualiser le calendrier"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Products:"
+msgstr "Produits :"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "selected"
+msgstr "sélectionnés"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Unit"
+msgstr "Unité"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "First shortage"
+msgstr "Première rupture"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "None in range"
+msgstr "Aucune dans la période"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "days"
+msgstr "jours"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Loading stock forecast..."
+msgstr "Chargement des prévisions de stock..."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Daily native stock forecasts by UTC date. Negative quantities mark a shortage."
+msgstr "Prévisions de stock natives par date UTC. Les quantités négatives indiquent une rupture."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Choose products and a warehouse, then refresh the calendar."
+msgstr "Choisissez les produits et un entrepôt, puis actualisez le calendrier."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Scroll across the table to see more dates."
+msgstr "Faites défiler le tableau pour voir les autres dates."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Daily forecast quantities and first shortage dates, UTC"
+msgstr "Quantités prévues par jour et premières dates de rupture, UTC"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "No stock-tracked products match the search."
+msgstr "Aucun produit stockable ne correspond à la recherche."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Showing the first 100 matches. Narrow the search to find another product."
+msgstr "Les 100 premiers résultats sont affichés. Précisez la recherche pour trouver un autre produit."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "No warehouse available"
+msgstr "Aucun entrepôt disponible"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "shortage"
+msgstr "rupture"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Daily stock forecast, scroll horizontally for more dates"
+msgstr "Prévisions de stock quotidiennes, défilement horizontal pour les autres dates"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid ". Dates use UTC. Quantities use each product unit of measure."
+msgstr ". Les dates utilisent UTC. Les quantités utilisent l'unité de mesure du produit."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Shortage worklist"
+msgstr "Liste des ruptures"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Sort shortages"
+msgstr "Trier les ruptures"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "First shortage date"
+msgstr "Date de première rupture"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Days below zero"
+msgstr "Jours sous zéro"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Product name"
+msgstr "Nom du produit"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Worst deficit"
+msgstr "Déficit maximal"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "First recovery"
+msgstr "Premier rétablissement"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Later shortage"
+msgstr "Rupture ultérieure"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Shortage recurs within the horizon."
+msgstr "La rupture se reproduit dans la période."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "No recovery within visible horizon"
+msgstr "Aucun rétablissement dans la période visible"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Explain shortage"
+msgstr "Expliquer la rupture"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Shortage explanation"
+msgstr "Explication de la rupture"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Save my watchlist"
+msgstr "Enregistrer ma sélection"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Restore my watchlist"
+msgstr "Rétablir ma sélection"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Updating watchlist..."
+msgstr "Mise à jour de la sélection..."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "Watchlist saved."
+msgstr "Sélection enregistrée."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "Watchlist restored."
+msgstr "Sélection rétablie."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "Watchlist restored. Some products are unavailable."
+msgstr "Sélection rétablie. Certains produits sont indisponibles."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.js:0
+msgid "No saved watchlist in this company."
+msgstr "Aucune sélection enregistrée dans cette société."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "No shortages in the selected products and horizon."
+msgstr "Aucune rupture pour les produits et la période sélectionnés."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Loading explanation..."
+msgstr "Chargement de l’explication..."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Retry explanation"
+msgstr "Réessayer l’explication"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Opening forecast balance"
+msgstr "Solde prévisionnel initial"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Scheduled receipts"
+msgstr "Réceptions prévues"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Scheduled deliveries"
+msgstr "Livraisons prévues"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Closing forecast balance"
+msgstr "Solde prévisionnel final"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Receipt"
+msgstr "Réception"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "No accessible open movements in this horizon."
+msgstr "Aucun mouvement ouvert accessible dans cette période."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Showing the first 100 accessible movements. Totals include the full native report."
+msgstr "Les 100 premiers mouvements accessibles sont affichés. Les totaux comprennent le rapport natif complet."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Opening plus receipts less deliveries equals closing. Daily balances do not establish customer allocation or availability within a day."
+msgstr "Le solde initial plus les réceptions moins les livraisons donne le solde final. Les soldes quotidiens ne définissent pas les allocations clients ni la disponibilité au cours de la journée."
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Explain date (UTC)"
+msgstr "Date à expliquer (UTC)"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/calendar.xml:0
+msgid "Opening includes earlier scheduled movements. Totals follow the native forecast. Source links show movements you can access, including overdue movements and dates through"
+msgstr "Le solde initial inclut les mouvements prévus antérieurs. Les totaux suivent les prévisions natives. Les liens montrent les mouvements accessibles, y compris ceux en retard et les dates jusqu’au"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Changes and follow-up"
+msgstr "Changements et suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Save review baseline"
+msgstr "Enregistrer la référence"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Review selected products"
+msgstr "Examiner les produits sélectionnés"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Manage action"
+msgstr "Gérer le suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Simulate receipt timing"
+msgstr "Simuler la réception"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Action owner"
+msgstr "Responsable du suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Action due date"
+msgstr "Échéance du suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Action state"
+msgstr "État du suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Internal action note"
+msgstr "Note interne du suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Save action"
+msgstr "Enregistrer le suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Receipt timing simulation"
+msgstr "Simulation de réception"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Receipt to simulate"
+msgstr "Réception à simuler"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Simulated arrival date (UTC)"
+msgstr "Date de réception simulée (UTC)"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Preview receipt timing"
+msgstr "Aperçu de la réception"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Reload receipt choices"
+msgstr "Recharger les réceptions"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/workflow.xml:0
+msgid "Action history"
+msgstr "Historique du suivi"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "Warehouse review"
+msgstr "Revue de l'entrepôt"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "Start warehouse scan"
+msgstr "Analyser l'entrepôt"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "Reload review"
+msgstr "Actualiser la revue"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "My actions"
+msgstr "Mes actions"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "Overdue"
+msgstr "En retard"
+
+#. module: erpintegrators_daily_stock_matrix
+#. odoo-javascript
+#: code:addons/erpintegrators_daily_stock_matrix/static/src/warehouse_review.xml:0
+msgid "Unassigned"
+msgstr "Sans responsable"
