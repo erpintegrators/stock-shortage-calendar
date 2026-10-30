@@ -1,0 +1,17 @@
+.o_stock_shortage_calendar {
+    width: 100%;
+    min-width: 0;
+    .o_calendar_products { max-height: 240px; overflow: auto; }
+    .o_calendar_table { overflow: auto; max-width: 100%; }
+    table { width: max-content; min-width: 100%; }
+    th, td { min-width: 112px; padding: 0.5rem; }
+    th:first-child { min-width: 220px; max-width: 320px; white-space: normal; }
+    .o_calendar_shortage { background: #fce8e6; color: #8b1912; font-weight: 700; }
+    .o_shortage_item, .o_shortage_explanation { overflow-wrap: anywhere; }
+    .o_shortage_item dd { margin-bottom: 0; }
+    .o_shortage_worklist .form-select { max-width: 100%; }
+}
+
+.o_shortage_workflow { min-width: 0; overflow-wrap: anywhere; }
+.o_shortage_action_form .d-flex > div, .o_receipt_simulation .d-flex > div { min-width: 0; max-width: 100%; }
+.o_receipt_simulation select { max-width: 100%; }

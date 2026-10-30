@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="watchlist_owner_rule" model="ir.rule">
+        <field name="name">Personal stock watchlist access</field>
+        <field name="model_id" ref="model_erpintegrators_stock_watchlist"/>
+        <field name="domain_force">[('user_id', '=', user.id), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="snapshot_scope_rule" model="ir.rule">
+        <field name="name">Private baseline scope</field><field name="model_id" ref="model_erpintegrators_shortage_snapshot"/>
+        <field name="domain_force">[('user_id', '=', user.id), ('company_id', 'in', company_ids), ('warehouse_id', 'any', [('id', '>', 0)]), ('product_id', 'any', [('active', '=', True)])]</field>
+    </record>
+    <record id="snapshot_source_rule" model="ir.rule">
+        <field name="name">Readable baseline source</field><field name="model_id" ref="model_erpintegrators_shortage_source"/>
+        <field name="domain_force">[('snapshot_id', 'any', [('id', '>', 0)]), ('move_id', 'any', [('id', '>', 0)])]</field>
+    </record>
+    <record id="shortage_action_rule" model="ir.rule">
+        <field name="name">Authorized follow-up scope</field><field name="model_id" ref="model_erpintegrators_shortage_action"/>
+        <field name="domain_force">[('company_id', 'in', company_ids), ('warehouse_id', 'any', [('id', '>', 0)]), ('product_id', 'any', [('active', '=', True)])]</field>
+    </record>
+    <record id="shortage_history_rule" model="ir.rule">
+        <field name="name">Authorized follow-up history</field><field name="model_id" ref="model_erpintegrators_shortage_history"/>
+        <field name="domain_force">[('action_id', 'any', [('id', '>', 0)])]</field>
+    </record>
+</odoo>
