@@ -1,0 +1,58 @@
+<section class="container py-4" style="font-family:Arial,sans-serif;color:#10263f;max-width:1100px;margin:0 auto;padding:24px">
+  <div class="text-center mb-4">
+    <img src="logo.png" alt="ERP Integrators" style="width:320px;max-width:100%;height:auto"/>
+    <p class="mt-3" style="color:#1854a8;font-size:18px">erpintegrators.com | Published by Solvync Inc.</p>
+    <h1 style="color:#10263f">Stock Shortage Calendar</h1>
+    <h2 style="color:#10263f">Give every stock shortage an owner and a next step</h2>
+    <p style="font-size:18px">See what changed, assign the supplier follow-up and preview receipt timing before changing the actual receipt.</p>
+    <p>Odoo 20 Community and Enterprise | Inventory required | Free under LGPL-3</p>
+  </div>
+  <div class="mb-4">
+    <img src="demo.gif" alt="18-second demo: review a two-unit shortage, inspect its cause, assign Purchasing and preview an earlier receipt" style="width:100%;height:auto"/>
+    <p>Demo recorded in Odoo 20 Community with demonstration data. The receipt preview leaves the actual receipt unchanged.</p>
+  </div>
+  <div class="p-4 mb-4 border" style="background-color:#f3f6fa">
+    <h2>From an exception to a clear next action</h2>
+    <p>A service kit has 10 units on hand and a confirmed delivery of 12. A receipt of 5 is due two days after the shortage starts. Review the two-unit deficit, assign the supplier call and preview an earlier arrival.</p>
+    <ol>
+      <li>Review the warehouse or choose the products you want to watch.</li>
+      <li>Inspect the shortage date, daily balances and readable source movements.</li>
+      <li>Save the owner, due date, state and internal action note.</li>
+      <li>Preview one eligible receipt arriving earlier or later.</li>
+      <li>Return to My actions, Overdue or Unassigned for the next follow-up.</li>
+    </ol>
+  </div>
+  <h2>What this adds to standard Odoo</h2>
+  <p>Odoo already provides forecasts, movement details and replenishment. This addon adds a dedicated shortage review and follow-up workflow.</p>
+  <table class="table table-bordered">
+    <thead><tr><th scope="col">Standard Odoo capability</th><th scope="col">Added workflow</th></tr></thead>
+    <tbody>
+      <tr><td>Forecasts and replenishment reports</td><td>Daily calendar and resumable warehouse shortage scan</td></tr>
+      <tr><td>Product and movement details</td><td>Shortage-day explanation and saved-baseline change tracking</td></tr>
+      <tr><td>General activities and responsible users</td><td>Dedicated action owners, due dates, revision history and follow-up queues</td></tr>
+      <tr><td>Actual receipt scheduling</td><td>Receipt-timing preview with the original receipt unchanged</td></tr>
+    </tbody>
+  </table>
+  <h2>Keep the team moving</h2>
+  <ul>
+    <li><b>My actions:</b> return to your open follow-ups, including actions whose stock forecast has recovered.</li>
+    <li><b>Overdue:</b> review open follow-ups whose due dates have passed.</li>
+    <li><b>Unassigned:</b> find scan observations that still need an eligible owner.</li>
+    <li><b>Change tracking:</b> compare matching UTC dates with your private saved baseline.</li>
+    <li><b>Action history:</b> review earlier owners, dates, states and notes.</li>
+    <li><b>Receipt simulation:</b> compare baseline and preview quantities before making an operational change.</li>
+  </ul>
+  <h2>How the review works</h2>
+  <ul>
+    <li>Select one active-company warehouse and a 7, 14 or 31-day UTC horizon.</li>
+    <li>Select up to 100 calendar products. Warehouse scans cover the readable stock-tracked catalogue in resumable batches of 100.</li>
+    <li>The host scheduler can continue a running scan after you leave the page. Scan observations expire after 24 hours.</li>
+    <li>Open a product to review its current forecast before acting. Your existing company and inventory permissions apply.</li>
+    <li>A completed follow-up and a recovered stock forecast are tracked separately.</li>
+  </ul>
+  <h2>Installation and scope</h2>
+  <p>Install the matching Odoo 20 module in your custom addons path, update the Apps list and install Stock Shortage Calendar. Inventory user access is required. Use self-hosted Odoo or a suitable Odoo.sh environment that permits custom Python modules.</p>
+  <p>Odoo Online cannot install this Python addon. The calendar uses Odoo's native stock forecast. Statistical demand prediction and automatic purchase order creation are outside its scope.</p>
+  <p>Scanning reads stock data and saves review metadata. Receipt simulation changes the preview only. Actual receipt dates, purchasing and stock transactions remain controlled through normal Odoo operations.</p>
+  <p>ERP Integrators is a product brand of Solvync Inc. Website: erpintegrators.com.</p>
+</section>
