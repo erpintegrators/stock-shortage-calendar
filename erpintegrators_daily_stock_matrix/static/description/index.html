@@ -1,18 +1,14 @@
-<section class="container py-4" style="font-family:Arial,sans-serif;color:#10263f;max-width:1100px;margin:0 auto;padding:24px">
-  <div class="text-center mb-4">
-    <img src="logo.png" alt="ERP Integrators" style="width:320px;max-width:100%;height:auto"/>
-    <p class="mt-3" style="color:#1854a8;font-size:18px">erpintegrators.com | Published by Solvync Inc.</p>
-    <h1 style="color:#10263f">Stock Shortage Calendar</h1>
-    <h2 style="color:#10263f">Give every stock shortage an owner and a next step</h2>
-    <p style="font-size:18px">See what changed, assign the supplier follow-up and preview receipt timing before changing the actual receipt.</p>
-    <p>Odoo 17 Community and Enterprise | Inventory required | Free under LGPL-3</p>
-  </div>
+<section class="container py-4" style="font-family:Arial,sans-serif;color:#092653;max-width:1100px;margin:0 auto;padding:24px">
+  <div class="d-flex align-items-center mb-4" style="color:#092653"><img src="logo.png" width="64" height="64" alt="ERP Integrators" class="mr-3"/><div><p class="mb-1" style="font-size:24px;font-weight:600">ERP Integrators</p><p class="mb-0">erpintegrators.com | Solvync Inc.</p></div></div>
+  <h1>Stock Shortage Calendar</h1>
+  <p>Review daily stock forecasts, assign shortage follow-ups, compare saved changes and preview receipt timing.</p>
+  <p>Odoo 17 Community and Enterprise | Inventory required | LGPL-3</p>
   <div class="mb-4">
-    <img src="demo.gif" alt="18-second demo: review a two-unit shortage, inspect its cause, assign Purchasing and preview an earlier receipt" style="width:100%;height:auto"/>
-    <p>Demo recorded in Odoo 20 Community with demonstration data. The receipt preview leaves the actual receipt unchanged.</p>
+    <img src="demo.gif" alt="Odoo 17 receipt timing simulation and unchanged operational records" style="width:100%;height:auto"/>
+    <p>Sequence recorded in Odoo 17 Community with demonstration data. Receipt simulation leaves operational records unchanged.</p>
   </div>
-  <div class="p-4 mb-4 border" style="background-color:#f3f6fa">
-    <h2>From an exception to a clear next action</h2>
+  <div class="p-4 mb-4 border" style="background-color:#F4F7FC">
+    <h2>Shortage review workflow</h2>
     <p>A service kit has 10 units on hand and a confirmed delivery of 12. A receipt of 5 is due two days after the shortage starts. Review the two-unit deficit, assign the supplier call and preview an earlier arrival.</p>
     <ol>
       <li>Review the warehouse or choose the products you want to watch.</li>
@@ -22,7 +18,9 @@
       <li>Return to My actions, Overdue or Unassigned for the next follow-up.</li>
     </ol>
   </div>
-  <h2>What this adds to standard Odoo</h2>
+  <h2>Receipt timing simulation</h2>
+  <img src="screenshots/receipt-preview.png" alt="Receipt timing simulation with baseline and simulated daily quantities" class="img-fluid mb-4"/>
+  <h2>Standard Odoo and added functions</h2>
   <p>Odoo already provides forecasts, movement details and replenishment. This addon adds a dedicated shortage review and follow-up workflow.</p>
   <table class="table table-bordered">
     <thead><tr><th scope="col">Standard Odoo capability</th><th scope="col">Added workflow</th></tr></thead>
@@ -33,7 +31,7 @@
       <tr><td>Actual receipt scheduling</td><td>Receipt-timing preview with the original receipt unchanged</td></tr>
     </tbody>
   </table>
-  <h2>Keep the team moving</h2>
+  <h2>Follow-up queues</h2>
   <ul>
     <li><b>My actions:</b> return to your open follow-ups, including actions whose stock forecast has recovered.</li>
     <li><b>Overdue:</b> review open follow-ups whose due dates have passed.</li>
@@ -42,7 +40,7 @@
     <li><b>Action history:</b> review earlier owners, dates, states and notes.</li>
     <li><b>Receipt simulation:</b> compare baseline and preview quantities before making an operational change.</li>
   </ul>
-  <h2>How the review works</h2>
+  <h2>Review settings and limits</h2>
   <ul>
     <li>Select one active-company warehouse and a 7, 14 or 31-day UTC horizon.</li>
     <li>Select up to 100 calendar products. Warehouse scans cover the readable stock-tracked catalogue in resumable batches of 100.</li>
