@@ -2,7 +2,7 @@
  'summary': 'Assign shortage follow-ups, track changes and preview receipt timing',
  'version': '19.0.1.0',
  'category': 'Inventory/Inventory',
- 'author': 'erpintegrators (Solvync Inc.)',
+ 'author': 'ERP Integrators',
  'website': 'https://erpintegrators.com',
  'license': 'LGPL-3',
  'depends': ['stock', 'web'],
